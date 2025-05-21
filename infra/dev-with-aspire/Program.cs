@@ -113,24 +113,8 @@ internal static class Program
         }
 
         // Force authentication when running on Azure, overriding Orchestrator's appsettings.json
-        // Keys for Azure should be set with dotnet user-secrets (or appsettings.json).
-        // IMPORTANT: see https://github.com/dotnet/aspire/issues/8824 - you might have to set the keys manually editing azd vault files.
         if (s_builder.ExecutionContext.IsPublishMode)
         {
-            // .NET Aspire BUG: see https://github.com/dotnet/aspire/issues/8824
-            // if (string.IsNullOrWhiteSpace(s_builder.Configuration["Parameters:AccessKey1"]))
-            // {
-            //     throw new ArgumentNullException("Parameters:accesskey1", "Access Key 1 is empty");
-            // }
-            //
-            // if (string.IsNullOrWhiteSpace(s_builder.Configuration["Parameters:AccessKey2"]))
-            // {
-            //     throw new ArgumentNullException("Parameters:accesskey2", "Access Key 2 is empty");
-            // }
-            // var key1 = s_builder.AddParameter("accesskey1", secret: true, value: s_builder.Configuration["Parameters:accesskey1"]);
-            // var key2 = s_builder.AddParameter("accesskey2", secret: true, value: s_builder.Configuration["Parameters:accesskey2"]);
-
-            // Note: values are retrieved from the local key vault, under ~/.azd/vaults - see https://github.com/dotnet/aspire/issues/8824
             var key1 = s_builder.AddParameter("accesskey1", secret: true);
             var key2 = s_builder.AddParameter("accesskey2", secret: true);
 
